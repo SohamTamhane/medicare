@@ -1,0 +1,118 @@
+.login-heading{
+    margin-top: 10px;
+}
+.login-page-main-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0px;
+}
+.login-page-main-section{
+    background-color: #2a9d904d;
+    width: 600px;
+    height: auto;
+    border-radius: 7px;
+}
+.google-logo{
+    width: 30px;
+    height: auto;
+}
+.login-with-google{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 300px;
+    padding: 5px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-text{
+    font-family: 'Tauri', sans-serif;
+    font-size: 16px;
+    margin-left: 10px;
+}
+.login-with-google-btn-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-or{
+    font-family: 'Tauri', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0px;
+}
+.login-with-email-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+.login-with-email-div{
+    background-color: white;
+    width: 300px;
+    text-align: center;
+    border-radius: 5px;
+}
+.login-text1{
+    font-family: 'Tauri', sans-serif;
+    font-size: 16px;
+    margin: 10px 0px;
+    margin-top: 15px;
+}
+.input-field{
+    font-family: 'Tauri', sans-serif;
+    font-size: 13px;
+    width: 200px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid black;
+    margin-bottom: 15px;
+}
+.login-btn-div{
+    margin: 10px 0px;
+    margin-bottom: 20px;
+}
+
+.sign-up--link-text-div{
+    font-family: 'Tauri', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 0px;
+    margin-top: -10px;
+}
+.link-text{
+    color: blue;
+}
+
+@media screen and (max-width: 636px) {
+    .login-page-main-section{
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 529px) {
+    .login-page-main-section{
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 431px) {
+    .login-page-main-section{
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 372px) {
+    .login-with-google{
+        width: 240px;
+    }
+    .login-with-email-div{
+        width: 240px;
+    }
+    .login-page-main-section{
+        width: 280px;
+    }
+}

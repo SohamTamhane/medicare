@@ -1,0 +1,40 @@
+.medi-chart-main-div{
+    width: 200px;
+    height: auto;
+    background-color: #C9E6E3;
+    padding: 15px;
+    border-radius: 5px;
+    position: relative;
+    margin: 10px;
+}
+.chart-patient-name{
+    font-family: 'Fredoka', sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.medi-desc{
+    font-family: 'Tauri', sans-serif;
+    font-size: 15px;
+    margin: 10px 0px;
+    color: black;
+}
+.medi-dose{
+    color: #DE0000;
+}
+.edit-img{
+    width: 25px;
+    height: auto;
+}
+.edit-btn{
+    background-color: #6C6C6C;
+    border-radius: 100px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+}

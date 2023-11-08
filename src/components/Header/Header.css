@@ -1,0 +1,22 @@
+.header-main-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: #003049;
+}
+.header-left-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-logo{
+    width: 45px;
+    height: auto;
+}
+.header-company-name{
+    font-family: 'Doppio One', sans-serif;
+    margin-left: 7px;
+    font-size: 20px;
+    color: white;
+}

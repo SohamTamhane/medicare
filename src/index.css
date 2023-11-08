@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Doppio+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tauri&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a{
+  text-decoration: none;
+}
+ul{
+  list-style-type: none;
+}
+
+.primary-btn{
+  font-family: 'Tauri', sans-serif;
+  background-color: #264653;
+  color: white;
+  font-size: 15px;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.primary-btn:hover{
+  background-color: rgb(50, 92, 109);
+}
+.highlight-span{
+  color: #003049;
+  border-bottom: #003049 solid;
+  font-weight: bold;
+}
+.section-heading{
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: bold;
+  color: black;
+  font-size: 27px;
+  margin-bottom: 20px;
+}
