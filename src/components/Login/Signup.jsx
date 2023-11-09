@@ -11,7 +11,7 @@ function Signup(){
     async function signInWithGoogle(){
         try{
             await signInWithPopup(auth, googleProvider);
-            navigate('/medicare/dashboard');
+            navigate('/dashboard');
         }
         catch(err){
             console.log(err.message);
@@ -41,7 +41,7 @@ function Signup(){
                             </div>
                         </div>
                     </div>
-                    <div className="sign-up--link-text-div">Already have an Account? <Link to={'/medicare/login'} className="link-text">Login</Link></div>
+                    <div className="sign-up--link-text-div">Already have an Account? <Link to={'/login'} className="link-text">Login</Link></div>
                 </div>
             </div>
         </div>

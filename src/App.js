@@ -9,13 +9,13 @@ import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/medicare">
             <Header/>
             <Routes>
-                <Route path='/medicare' element={<Home/>}/>
-                <Route path='/medicare/login' element={<Login/>}/>
-                <Route path='/medicare/signup' element={<Signup/>}/>
-                <Route path='/medicare/dashboard' element={<Dashboard/>}/>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/signup' element={<Signup/>}/>
+                <Route path='/dashboard' element={<Dashboard/>}/>
                 <Route path='*' element={<Error/>}/>
             </Routes>
             <Footer/>

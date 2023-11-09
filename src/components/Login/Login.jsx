@@ -21,7 +21,7 @@ function Login() {
     useEffect(()=>{
         getRedirectResult(auth).then((result)=>{
             if(result){
-                navigate('/medicare/dashboard');
+                navigate('/dashboard');
             }
         });
     }, [])
@@ -48,7 +48,7 @@ function Login() {
                             </div>
                         </div>
                     </div>
-                    <div className="sign-up--link-text-div">Don't have an Account? <Link to={'/medicare/signup'} className="link-text">Sign Up</Link></div>
+                    <div className="sign-up--link-text-div">Don't have an Account? <Link to={'/signup'} className="link-text">Sign Up</Link></div>
                 </div>
             </div>
         </div>

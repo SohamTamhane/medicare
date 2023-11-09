@@ -10,7 +10,7 @@ function Header(){
                 <span className='header-company-name'>MediCare</span>
             </Link>
             <div className='header-right-div'>
-                <Link to={'/medicare/login'} className='primary-btn'>Login</Link>
+                <Link to={'/login'} className='primary-btn'>Login</Link>
             </div>
         </div>
     )
