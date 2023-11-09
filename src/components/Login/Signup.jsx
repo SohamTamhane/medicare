@@ -2,21 +2,32 @@ import "./Login.css";
 import GoogleLogo from "../../assets/google.png";
 import { Link, useNavigate } from "react-router-dom";
 import {auth, googleProvider } from "../../config/firebase.js";
-import {signInWithPopup} from 'firebase/auth';
+import {GoogleAuthProvider, getRedirectResult, signInWithRedirect} from 'firebase/auth';
+import { useContext, useEffect } from "react";
+import { Context } from "../../config/Context.js";
 
 function Signup(){
 
     const navigate = useNavigate();
+    const {setLoginInfo} = useContext(Context);
 
-    async function signInWithGoogle(){
-        try{
-            await signInWithPopup(auth, googleProvider);
-            navigate('/dashboard');
+    async function signInWithGoogle() {
+        try {
+            await signInWithRedirect(auth, new GoogleAuthProvider());
         }
-        catch(err){
+        catch (err) {
             console.log(err.message);
         }
     }
+
+    useEffect(()=>{
+        getRedirectResult(auth).then((result)=>{
+            if(result){
+                setLoginInfo({status: true, user: result.user});
+                navigate('/dashboard');
+            }
+        });
+    }, [])
 
     return(
         <div className="login-page-main-div">

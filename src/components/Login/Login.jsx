@@ -2,16 +2,22 @@ import "./Login.css";
 import GoogleLogo from "../../assets/google.png";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase.js";
-import { GoogleAuthProvider, getRedirectResult, signInWithRedirect } from 'firebase/auth';
-import { useEffect } from "react";
+import { GoogleAuthProvider, getRedirectResult, signInWithRedirect, setPersistence, inMemoryPersistence } from 'firebase/auth';
+import { useContext, useEffect } from "react";
+import { Context } from "../../config/Context.js";
 
 function Login() {
 
     const navigate = useNavigate();
+    const {setLoginInfo} = useContext(Context);
 
     async function signInWithGoogle() {
         try {
-            await signInWithRedirect(auth, new GoogleAuthProvider());
+            await setPersistence(auth, inMemoryPersistence).then(()=>{
+                return signInWithRedirect(auth, new GoogleAuthProvider());
+            }).catch((err)=>{
+                console.log(err.message);
+            })
         }
         catch (err) {
             console.log(err.message);
@@ -21,6 +27,7 @@ function Login() {
     useEffect(()=>{
         getRedirectResult(auth).then((result)=>{
             if(result){
+                setLoginInfo({status: true, user: result.user});
                 navigate('/dashboard');
             }
         });

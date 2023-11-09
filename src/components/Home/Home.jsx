@@ -1,10 +1,25 @@
 import './Home.css';
 import Hero from "../../assets/hero1.png";
 import DevImg from "../../assets/devImg.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Card from './Card';
+import { useContext, useEffect } from 'react';
+import { Context } from '../../config/Context';
 
 function Home(){
+
+    const navigate = useNavigate();
+    const {loginInfo} = useContext(Context);
+
+    useEffect(()=>{
+        if(loginInfo?.status===true){
+            navigate('/dashboard');
+        }
+        else if(loginInfo?.status===false){
+            navigate('/login');
+        }
+    }, [loginInfo])
+
     return(
         <div className="home-page-main-div">
             <div className="hero-section">

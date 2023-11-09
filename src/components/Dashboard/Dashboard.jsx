@@ -5,15 +5,36 @@ import QtyImg from "../../assets/quantity.png";
 import AccountImg from "../../assets/account.png";
 import MedicineChart from "./MedicineChart/MedicineChart";
 import CrossImg from "../../assets/cross.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Context } from "../../config/Context";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase";
 
 function Dashboard() {
+
+    const navigate = useNavigate();
+    const {loginInfo} = useContext(Context);
+
+    async function logoutFunc(){
+        try{
+            await signOut(auth).then(()=>{
+                navigate('/login');
+            }).catch((error)=>{
+                console.log(error);
+            })
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <div className="dashboard-main-div">
                 <div className="dashboard-hero-section">
                     <div className="d1-hero-heading">
-                        Welcome, <span className="highlight-span">Soham Tamhane</span>
+                        Welcome, <span className="highlight-span">{loginInfo?.user?.displayName}</span>
                     </div>
                     <div className="dashboard-options-div">
                         <div className="d1-option">
