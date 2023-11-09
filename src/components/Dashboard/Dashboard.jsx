@@ -1,60 +1,19 @@
 import "./Dashboard.css";
-import ChartImg from "../../assets/chart.png";
-import SearchImg from "../../assets/search.png";
-import QtyImg from "../../assets/quantity.png";
-import AccountImg from "../../assets/account.png";
 import MedicineChart from "./MedicineChart/MedicineChart";
 import CrossImg from "../../assets/cross.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { Context } from "../../config/Context";
-import { signOut } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import DashboardNav from "./DashboardNav";
 
 function Dashboard() {
 
-    const navigate = useNavigate();
     const {loginInfo} = useContext(Context);
-
-    async function logoutFunc(){
-        try{
-            await signOut(auth).then(()=>{
-                navigate('/login');
-            }).catch((error)=>{
-                console.log(error);
-            })
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
 
     return (
         <>
             <div className="dashboard-main-div">
-                <div className="dashboard-hero-section">
-                    <div className="d1-hero-heading">
-                        Welcome, <span className="highlight-span">{loginInfo?.user?.displayName}</span>
-                    </div>
-                    <div className="dashboard-options-div">
-                        <div className="d1-option">
-                            <img src={ChartImg} alt="medicineChart" className="d1-img" />
-                            <div className="d1-text">Medicine Chart</div>
-                        </div>
-                        <div className="d1-option">
-                            <img src={SearchImg} alt="medicineChart" className="d1-img" />
-                            <div className="d1-text">Your Medicine</div>
-                        </div>
-                        <div className="d1-option">
-                            <img src={QtyImg} alt="medicineChart" className="d1-img" />
-                            <div className="d1-text">View Quantity</div>
-                        </div>
-                        <div className="d1-option">
-                            <img src={AccountImg} alt="medicineChart" className="d1-img" />
-                            <div className="d1-text">View Account</div>
-                        </div>
-                    </div>
-                </div>
+                <DashboardNav/>
                 <div className='dashboard-s1 home-section'>
                     <div className='section-heading'>
                         Medicine <span className='highlight-span'>Chart</span>
