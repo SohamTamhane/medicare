@@ -1,22 +1,54 @@
-import { Link } from "react-router-dom";
 import "./Dashboard.css";
 import CrossImg from "../../assets/cross.png";
 import DashboardNav from "./DashboardNav";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { db } from "../../config/firebase";
+import { addDoc, collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import { Context } from "../../config/Context";
 
 function YourMedicine(){
+
+    const {loginInfo} = useContext(Context);
 
     const blackDiv = useRef();
     const [message, setMessage] = useState("");
 
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
-    const [medType, setMedType] = useState("");
+    const [medType, setMedType] = useState("pills");
     const [location, setLocation] = useState("");
 
+    const usersCollectionRef = collection(db, "users");
+
     async function handleSumbit(){
-        if(name!=="" && quantity!=="" && medType!==""){
-            console.log(name, quantity, medType, location);
+        if(name!=="" && quantity!==""){
+            try{
+                const data = await getDocs(usersCollectionRef);
+                const mainData = data.docs.map((doc)=>({...doc.data(), id: doc.id}));
+                const filterData = mainData.filter((elm)=>{return elm.email===loginInfo?.user?.email})
+                
+                if(filterData.length===0){
+                    await addDoc(usersCollectionRef, {email: loginInfo?.user?.email, medicine: [{name: name, qty: quantity, type: medType, location: location}]});
+                    setMessage("Medicine Added Successfully!!");
+                }
+                else{
+                    const id = filterData[0].id;
+                    const userDoc = doc(db, "users", id);
+                    const med = filterData[0].medicine;
+                    const filterMed = med.filter((elm)=>{return elm.name===name})
+                    if(filterMed.length!==0){
+                        setMessage("Medicine Already Exists");
+                    }
+                    else{
+                        med.push({name: name, qty: quantity, type: medType, location: location});
+                        await updateDoc(userDoc, {medicine: med});
+                        setMessage("Medicine Added Successfully!!");
+                    }
+                }
+            }
+            catch(err){
+                console.log(err);
+            }
         }
         else{
             setMessage("Please Fill All the Details");
@@ -51,7 +83,7 @@ function YourMedicine(){
                     <input value={name} onChange={(e) => setName(e.target.value)} className="input-field" type="text" placeholder="Medicine Name" /> <br />
                     <input value={quantity} onChange={(e) => setQuantity(e.target.value)} className="input-field" type="number" placeholder="Quantity" /> <br />
                     <select value={medType} onChange={(e) => setMedType(e.target.value)} className="input-field">
-                        <option value="pills">Pills</option>
+                        <option selected value="pills">Pills</option>
                         <option value="drops">Drops</option>
                     </select> <br />
                     <input value={location} onChange={(e) => setLocation(e.target.value)} className="input-field" type="text" placeholder="Last Location" /> <br />
