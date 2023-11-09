@@ -9,7 +9,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
     return (
-        <BrowserRouter basename="/medicare">
+        <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
             <Header/>
             <Routes>
                 <Route path='/' element={<Home/>}/>
