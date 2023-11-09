@@ -1,24 +1,32 @@
 import "./Login.css";
 import GoogleLogo from "../../assets/google.png";
 import { Link, useNavigate } from "react-router-dom";
-import {auth, googleProvider } from "../../config/firebase.js";
-import {signInWithPopup} from 'firebase/auth';
+import { auth } from "../../config/firebase.js";
+import { GoogleAuthProvider, getRedirectResult, signInWithRedirect } from 'firebase/auth';
+import { useEffect } from "react";
 
-function Login(){
+function Login() {
 
     const navigate = useNavigate();
 
-    async function signInWithGoogle(){
-        try{
-            await signInWithPopup(auth, googleProvider);
-            navigate('/medicare/dashboard');
+    async function signInWithGoogle() {
+        try {
+            await signInWithRedirect(auth, new GoogleAuthProvider());
         }
-        catch(err){
+        catch (err) {
             console.log(err.message);
         }
     }
 
-    return(
+    useEffect(()=>{
+        getRedirectResult(auth).then((result)=>{
+            if(result){
+                navigate('/medicare/dashboard');
+            }
+        });
+    }, [])
+
+    return (
         <div className="login-page-main-div">
             <div className="login-page-main-section">
                 <div className="login-heading section-heading">Login</div>
@@ -33,8 +41,8 @@ function Login(){
                     <div className="login-with-email-center">
                         <div className="login-with-email-div">
                             <div className="login-text1">Login with Email</div>
-                            <input className="input-field" type="text" placeholder="Email"/> <br />
-                            <input className="input-field" type="text" placeholder="Password"/>
+                            <input className="input-field" type="text" placeholder="Email" /> <br />
+                            <input className="input-field" type="text" placeholder="Password" />
                             <div className="login-btn-div">
                                 <Link className='primary-btn'>Login</Link>
                             </div>
