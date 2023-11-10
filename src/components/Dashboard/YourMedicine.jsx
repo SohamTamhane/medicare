@@ -12,6 +12,7 @@ function YourMedicine() {
 
     const { loginInfo } = useContext(Context);
     const [allMed, setAllMed] = useState(undefined);
+    const [filterData, setFilterData] = useState(undefined);
 
     const blackDiv = useRef();
     const editBlackDiv = useRef();
@@ -22,7 +23,6 @@ function YourMedicine() {
     const [quantity, setQuantity] = useState(1);
     const [medType, setMedType] = useState("pills");
     const [location, setLocation] = useState("");
-
     
     const [editOldName, setEditOldName] = useState("");
     const [editName, setEditName] = useState("");
@@ -32,11 +32,16 @@ function YourMedicine() {
 
     const usersCollectionRef = collection(db, "users");
 
+    function filterMedFunc(event){
+        setFilterData(allMed.filter(f => f.name.toLowerCase().includes(event.target.value)));
+    }
+
     async function fetchUserDetails() {
         const data = await getDocs(usersCollectionRef);
         const mainData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         const filterData = mainData.filter((elm) => { return elm.email === loginInfo?.user?.email })
         setAllMed(filterData[0]?.medicine);
+        setFilterData(filterData[0]?.medicine);
     }
 
     async function handleSumbit() {
@@ -138,12 +143,12 @@ function YourMedicine() {
                         Your <span className='highlight-span'>Medicine</span>
                     </div>
                     <div className="filter-bar-main-div">
-                        <input type="text" className="filter-bar" placeholder="Enter Medicine Name" />
+                        <input onChange={filterMedFunc} type="text" className="filter-bar" placeholder="Enter Medicine Name" />
                         <button onClick={openBlackDiv} className="add-medi-btn primary-btn">+</button>
                     </div>
                     <div className="all-medi-details-main-div">
                         {
-                            allMed?.map((med) => (
+                            filterData?.map((med) => (
                                 <div key={med.name} className="medicine-details-div">
                                     <div className="medicine-name-qty-div">
                                         <div className="medicine-name">{med.name}</div>
