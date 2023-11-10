@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/medicare/static/css/main.c3f048bb.css",
-    "main.js": "/medicare/static/js/main.e2369d92.js",
+    "main.js": "/medicare/static/js/main.6280fad3.js",
     "static/media/hero1.png": "/medicare/static/media/hero1.ce1264955ee75b9f39a6.png",
     "static/media/devImg.png": "/medicare/static/media/devImg.1de9429d5e221b8a7065.png",
     "index.html": "/medicare/index.html",
     "main.c3f048bb.css.map": "/medicare/static/css/main.c3f048bb.css.map",
-    "main.e2369d92.js.map": "/medicare/static/js/main.e2369d92.js.map"
+    "main.6280fad3.js.map": "/medicare/static/js/main.6280fad3.js.map"
   },
   "entrypoints": [
     "static/css/main.c3f048bb.css",
-    "static/js/main.e2369d92.js"
+    "static/js/main.6280fad3.js"
   ]
 }
