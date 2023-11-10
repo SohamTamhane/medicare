@@ -61,7 +61,7 @@
 
 
 .add-medi-chart-main-black-div{
-    position: absolute;
+    position: fixed;
     top: 0;
     background-color: #000000c7;
     width: 100%;
@@ -143,6 +143,71 @@
 }
 
 
+.medicine-details-div{
+    font-family: 'Tauri', sans-serif;
+    background-color: #EEEEEE;
+    border: 2px solid black;
+    width: 500px;
+    padding: 5px 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+.medicine-name-qty-div{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.medicine-name{
+    font-size: 16px;
+}
+
+.medicine-qty{
+    font-size: 15px;
+    color: #DE0000;
+    margin-left: 10px;
+}
+.medicine-location{
+    font-size: 15px;
+    color: rgb(96, 96, 96);
+}
+.all-medi-details-main-div{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.edit-btn{
+    background-color: #6C6C6C;
+    border-radius: 100px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+}
+.edit-img{
+    width: 25px;
+    height: auto;
+}
+
+
+.edit-medi-chart-main-black-div{
+    position: fixed;
+    top: 0;
+    background-color: #000000c7;
+    width: 100%;
+    height: 100%;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
 @media screen and (max-width: 703px) {
     .medi-chart-all-div{
         justify-content: center;
@@ -176,5 +241,17 @@
     }
     .input-field{
         width: 100px;
+    }
+}
+
+@media screen and (max-width: 536px) {
+    .medicine-details-div{
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 328px) {
+    .medicine-details-div{
+        width: 200px;
     }
 }
