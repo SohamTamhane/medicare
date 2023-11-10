@@ -33,7 +33,7 @@ function YourMedicine() {
     const usersCollectionRef = collection(db, "users");
 
     function filterMedFunc(event){
-        setFilterData(allMed.filter(f => f.name.toLowerCase().includes(event.target.value)));
+        setFilterData(allMed.filter(f => f.name.toLowerCase().includes(event.target.value.toLowerCase())));
     }
 
     async function fetchUserDetails() {
