@@ -2,13 +2,23 @@ import "./Dashboard.css";
 import MedicineChart from "./MedicineChart/MedicineChart";
 import CrossImg from "../../assets/cross.png";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { Context } from "../../config/Context";
 import DashboardNav from "./DashboardNav";
 
 function Dashboard() {
 
     const {loginInfo} = useContext(Context);
+    const blackDiv = useRef();
+    const [message, setMessage] = useState("");
+
+    function openBlackDiv() {
+        blackDiv.current.style.display = "flex";
+    }
+
+    function closeBlackDiv() {
+        blackDiv.current.style.display = "none";
+    }
 
     return (
         <>
@@ -23,20 +33,24 @@ function Dashboard() {
                         <MedicineChart />
                     </div>
                     <div className="create-chart-btn-div">
-                        <span className="create-chart-btn primary-btn">Create New Chart</span>
+                        <span onClick={openBlackDiv} className="create-chart-btn primary-btn">Create New Chart</span>
                     </div>
                 </div>
             </div>
-            <div className="add-medi-chart-main-black-div">
+            <div ref={blackDiv} className="add-medi-dashboard-main-black-div">
                 <div className="add-medi-chart-div">
-                    <div className="add-medi-chart-text1">Medicine Chart</div>
-                    <input className="input-field" type="text" placeholder="Email" /> <br />
-                    <input className="input-field" type="text" placeholder="Password" />
-                    <div className="login-btn-div">
-                        <Link className='primary-btn'>Add</Link>
+                    <div className="add-medi-chart-text1">Create Medicine Chart</div>
+                    <input className="input-field" type="text" placeholder="Patient Name" /> <br />
+                    <div className="medicine-input-div">
+                        <input className="input-field" type="text" placeholder="Medicine Name" /> <br />
+                        <input className="input-field" type="text" placeholder="Dose" /> <br />
                     </div>
-                    <div className="cross-btn-div">
-                        <img src={CrossImg} alt="cross" className="cross-img"/>
+                    <div className="add-medi-chart-text2">{message}</div>
+                    <div className="login-btn-div">
+                        <button className='primary-btn'>Add</button>
+                    </div>
+                    <div onClick={closeBlackDiv} className="cross-btn-div">
+                        <img src={CrossImg} alt="cross" className="cross-img" />
                     </div>
                 </div>
             </div>

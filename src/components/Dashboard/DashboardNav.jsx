@@ -2,6 +2,7 @@ import ChartImg from "../../assets/chart.png";
 import SearchImg from "../../assets/search.png";
 import QtyImg from "../../assets/quantity.png";
 import AccountImg from "../../assets/account.png";
+import ExpenseImg from "../../assets/expense.png";
 import { useContext } from "react";
 import { Context } from "../../config/Context";
 import "./Dashboard.css";
@@ -26,8 +27,8 @@ function DashboardNav() {
                     <div className="d1-text">Your Medicine</div>
                 </Link>
                 <Link to={'/dashboard/qty'} className="d1-option">
-                    <img src={QtyImg} alt="medicineChart" className="d1-img" />
-                    <div className="d1-text">View Quantity</div>
+                    <img src={ExpenseImg} alt="medicineChart" className="d1-img" />
+                    <div className="d1-text">Your Expenses</div>
                 </Link>
                 <Link to={'/dashboard/account'} className="d1-option">
                     <img src={AccountImg} alt="medicineChart" className="d1-img" />
