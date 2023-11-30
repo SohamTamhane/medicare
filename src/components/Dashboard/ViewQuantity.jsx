@@ -13,6 +13,8 @@ function ViewQuantity(){
     const usersCollectionRef = collection(db, "users");
     const { loginInfo } = useContext(Context);
 
+    let dateArr = [];
+
     const [expense, setExpense] = useState();
 
     // Edit Remaining
@@ -44,7 +46,11 @@ function ViewQuantity(){
         const data = await getDocs(usersCollectionRef);
         const mainData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         const filterData = mainData.filter((elm) => { return elm.email === loginInfo?.user?.email })
-        setExpense(filterData[0]?.expense);
+        // console.log(filterData[0]?.expense);
+        const sortedDesc = filterData[0]?.expense.sort(
+            (objA, objB) => Number(new Date(objB.date)) - Number(new Date(objA.date)),
+        );
+        setExpense(sortedDesc);
     }
 
     useEffect(()=>{
@@ -63,6 +69,8 @@ function ViewQuantity(){
                     const userDoc = doc(db, "users", id);
                     await updateDoc(userDoc, { expense: [{ id: Date.now(), date: date, amount: amount, desc: desc }] });
                     setMessage("Expense Created Successfully!!");
+                    setAmount("");
+                    setDesc("");
                     fetchUserDetails();
                 }
                 else {
@@ -73,6 +81,8 @@ function ViewQuantity(){
                     med.push({ id: Date.now(), date: date, amount: amount, desc: desc });
                     await updateDoc(userDoc, { expense: med });
                     setMessage("Expense Created Successfully!!");
+                    setAmount("");
+                    setDesc("");
                     fetchUserDetails();
                 }
             }
@@ -137,18 +147,46 @@ function ViewQuantity(){
                     </div>
                     <div className="all-medi-details-main-div">
                         {
-                            expense?.map((exp) => (
-                                <div key={exp.id} className="medicine-details-div">
-                                    <div className="medicine-name-qty-div">
-                                        <div className="medicine-name">₹{exp.amount}/-</div>
-                                        <div className="medicine-qty">({exp.date})</div>
-                                    </div>
-                                    <div className="medicine-location">Desc: {exp.desc}</div>
-                                    <div onClick={()=>openEditBlackDiv(exp.amount, exp.date, exp.desc, exp.id)} className="edit-btn">
-                                        <img src={EditImg} className="edit-img" alt="edit" />
-                                    </div>
-                                </div>
-                            ))
+                            expense?.map((exp, index) => {
+                                if(index===0){
+                                    dateArr = [];
+                                }
+                                else if (dateArr.includes(exp.date)){
+                                    return(
+    
+                                        <div key={exp.id} className="medicine-details-div">
+                                            <div className="medicine-name-qty-div">
+                                                <div className="medicine-name">₹{exp.amount}/-</div>
+                                            </div>
+                                            <div className="medicine-location">Desc: {exp.desc}</div>
+                                            <div onClick={()=>openEditBlackDiv(exp.amount, exp.date, exp.desc, exp.id)} className="edit-btn">
+                                                <img src={EditImg} className="edit-img" alt="edit" />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                else{
+                                    dateArr.push(exp.date)
+                                    return(
+                                        <div key={exp.id}>
+                                            <div className="main-date-div">
+                                                [{new Date(exp.date).toLocaleDateString('en-GB')}]
+                                            </div>
+                                            <div className="medicine-details-div">
+                                                <div className="medicine-name-qty-div">
+                                                    <div className="medicine-name">₹{exp.amount}/-</div>
+                                                    {/* <div className="medicine-qty">({exp.date})</div> */}
+                                                </div>
+                                                <div className="medicine-location">Desc: {exp.desc}</div>
+                                                <div onClick={()=>openEditBlackDiv(exp.amount, exp.date, exp.desc, exp.id)} className="edit-btn">
+                                                    <img src={EditImg} className="edit-img" alt="edit" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                
+                            })
                         }
                     </div>
                 </div>
